@@ -14,6 +14,13 @@ pipeline {
     }
 
     stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', 
+                   url: 'https://github.com/chakisuk/back-test.git',
+                   credentialsId: 'farmdora-login'  // 필요한 경우
+            }
+        }
         
         stage('Prepare') {
             steps {
