@@ -56,6 +56,12 @@ pipeline {
                 sh 'docker run -d -p 8080:8080 --name ${CONTAINER_NAME} ${DOCKER_IMAGE}:latest'
             }
         }
+        
+        stage('Cleanup') {
+            steps {
+                sh 'docker image prune -f --filter="reference=${DOCKERHUB_USERNAME}/${IMAGE_NAME}"' // chakisuk/test-back + <none> 태그 삭제
+            }
+        }
     }
 
     post {
